@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="logo">ZLoja</div>
+    <input type="text" id="busca" placeholder="O que você procura hoje?">
+    <div class="carrinho-lg" onclick="abrirCarrinho()">
+      🛒 <span id="contador">0</span>
+    </div>
+  </header>
+  <!-- Navegação -->
+  <nav class="nav">
+    <button onclick="filtrar('todos')">Todos</button>
+    <button onclick="filtrar('homem')">Homem</button>
+    <button onclick="filtrar('mulher')">Mulher</button>
+    <button onclick="filtrar('diversos')">Diversos</button>
+  </nav>
+
+  <!-- Produtos -->
+<section id="produtos" class="produtos-container"></section>
+
+
+  <!-- Carrinho -->
+ <div id="carrinho-id" class="carrinho">
+  <h2>Seu Carrinho</h2>
+  <hr>
+  <div id="itens-carrinho"></div>
+  <hr>
+  <div class="total-carrinho">
+    <strong>Total:</strong> R$ <span id="total-carrinho">0.00</span>
+  </div>
+  <button class="whatsapp-btn" onclick="finalizarWhatsApp()">Finalizar via WhatsApp</button>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>

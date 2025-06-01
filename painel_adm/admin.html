@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <h1>Painel do Administrador</h1>
+
+  <form id="produto-form">
+    <input type="text" id="nome" placeholder="Nome do produto" required>
+    <input type="number" id="preco" placeholder="Preço (R$)" required>
+    <input type="text" id="tamanhos" placeholder="Tamanhos (ex: P,M,G)" required>
+    <input type="number" id="quantidade" placeholder="Quantidade em estoque" required>
+    <input type="file" id="imagem" accept="image/*" required>
+    <button type="submit">Cadastrar Produto</button>
+  </form>
+
+  <hr>
+
+  <h2>Produtos Cadastrados</h2>
+  <div id="lista-produtos"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
