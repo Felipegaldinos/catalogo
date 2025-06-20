@@ -3,27 +3,240 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Admin</title>
-  <link rel="stylesheet" href="admin.css">
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40;
+      color: white;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px 20px;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .content {
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    .product-image-preview {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 sidebar">
+        <h4 class="text-center">Painel Admin</h4>
+        <a href="#" onclick="showSection('add-product')">Adicionar Produto</a>
+        <a href="#" onclick="showSection('list-products')">Produtos Cadastrados</a>
+        <p class="text-center mt-4">Total: <span id="contador-produtos">0</span></p>
+      </div>
+      <div class="col-md-10 content">
+        <div id="add-product" class="section">
+          <h3>Adicionar Produto</h3>
+          <form id="form-produto">
+            <div class="mb-3">
+              <label class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Preço</label>
+              <input type="number" step="0.01" class="form-control" id="preco" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Categoria</label>
+              <select class="form-control" id="categoria">
+                <option value="camisas">Camisas</option>
+                <option value="calcados">Calçados</option>
+                <option value="diversos">Diversos</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tamanhos</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="P" id="tamP">
+                <label class="form-check-label" for="tamP">P</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="M" id="tamM">
+                <label class="form-check-label" for="tamM">M</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="G" id="tamG">
+                <label class="form-check-label" for="tamG">G</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="39" id="tam39">
+                <label class="form-check-label" for="tam39">39</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="40" id="tam40">
+                <label class="form-check-label" for="tam40">40</label>
+                 <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+               <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+               <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+               <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+               <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="38" id="tam38">
+                <label class="form-check-label" for="tam38">38</label>
+              </div>
+                
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Estoque</label>
+              <input type="number" class="form-control" id="estoque" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Imagem</label>
+              <input type="file" class="form-control" id="imagem" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Produto</button>
+          </form>
+        </div>
 
-  <h1>Painel do Administrador</h1>
+        <div id="list-products" class="section hidden">
+          <h3>Produtos Cadastrados</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Tamanhos</th>
+                <th>Estoque</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-produtos"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <form id="produto-form">
-    <input type="text" id="nome" placeholder="Nome do produto" required>
-    <input type="number" id="preco" placeholder="Preço (R$)" required>
-    <input type="text" id="tamanhos" placeholder="Tamanhos (ex: P,M,G)" required>
-    <input type="number" id="quantidade" placeholder="Quantidade em estoque" required>
-    <input type="file" id="imagem" accept="image/*" required>
-    <button type="submit">Cadastrar Produto</button>
-  </form>
+  <script>
+    let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+    let indexEditando = null;
 
-  <hr>
+    document.getElementById('form-produto').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  <h2>Produtos Cadastrados</h2>
-  <div id="lista-produtos"></div>
+      const nome = document.getElementById('nome').value;
+      const preco = parseFloat(document.getElementById('preco').value);
+      const categoria = document.getElementById('categoria').value;
+      const tamanhos = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(cb => cb.value);
+      const estoque = parseInt(document.getElementById('estoque').value);
+      const imagemInput = document.getElementById('imagem');
+      const imagem = imagemInput.files[0] ? URL.createObjectURL(imagemInput.files[0]) : (indexEditando !== null ? produtos[indexEditando].imagem : "");
 
-  <script src="admin.js"></script>
+      const produto = { nome, preco, categoria, tamanhos, estoque, imagem };
+
+      if (indexEditando !== null) {
+        produtos[indexEditando] = produto;
+        indexEditando = null;
+        alert("Produto editado com sucesso!");
+      } else {
+        produtos.push(produto);
+        alert("Produto adicionado com sucesso!");
+      }
+
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+      atualizarTabela();
+      atualizarContador();
+      this.reset();
+      document.getElementById('imagem').required = true;
+    });
+
+    function atualizarTabela() {
+      const tabela = document.getElementById('tabela-produtos');
+      tabela.innerHTML = '';
+      produtos.forEach((p, index) => {
+        tabela.innerHTML += `
+          <tr>
+            <td><img src="${p.imagem}" class="product-image-preview" /></td>
+            <td>${p.nome}</td>
+            <td>R$ ${p.preco.toFixed(2)}</td>
+            <td>${p.categoria}</td>
+            <td>${p.tamanhos.join(', ')}</td>
+            <td>${p.estoque}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" onclick="editarProduto(${index})">Editar</button>
+              <button class="btn btn-sm btn-danger" onclick="excluirProduto(${index})">Excluir</button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    function excluirProduto(index) {
+      if (confirm("Tem certeza que deseja excluir este produto?")) {
+        produtos.splice(index, 1);
+        localStorage.setItem('produtos', JSON.stringify(produtos));
+        atualizarTabela();
+        atualizarContador();
+        alert("Produto excluído com sucesso!");
+      }
+    }
+
+    function editarProduto(index) {
+      const p = produtos[index];
+      document.getElementById('nome').value = p.nome;
+      document.getElementById('preco').value = p.preco;
+      document.getElementById('categoria').value = p.categoria;
+      document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = p.tamanhos.includes(cb.value));
+      document.getElementById('estoque').value = p.estoque;
+      document.getElementById('imagem').required = false;
+      indexEditando = index;
+      showSection('add-product');
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function atualizarContador() {
+      document.getElementById('contador-produtos').textContent = produtos.length;
+    }
+
+    window.addEventListener('load', () => {
+      atualizarTabela();
+      atualizarContador();
+    });
+  </script>
 </body>
 </html>

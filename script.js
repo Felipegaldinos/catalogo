@@ -3,14 +3,14 @@ const produtos = [
     id: 1,
     nome: "Camisa Barcelona Messi",
     preco: 265.90,
-    categoria: "homem",
+    categoria: "camisas",
     imagem: "img/barca01.jpg"
   },
   {
     id: 2,
     nome: "Tênis Nike",
     preco: 265.90,
-    categoria: "mulher",
+    categoria: "calçados",
     imagem: "img/lunargato01.jpg"
   }
 ];
@@ -33,13 +33,29 @@ function renderizarProdutos(lista) {
           R$ ${p.preco.toFixed(2)} no Pix
         </div>
         <div class="opcoes">
-          <label>Tam:
-            <select id="tamanho-${p.id}">
-              <option>P</option>
-              <option>M</option>
-              <option>G</option>
-            </select>
-          </label>
+  ${p.nome.toLowerCase().includes('tênis') || p.categoria === 'tenis' ? `
+    <label>Número:
+      <select id="tamanho-${p.id}">
+        <option>36</option>
+        <option>37</option>
+        <option>38</option>
+        <option>39</option>
+        <option>40</option>
+        <option>41</option>
+        <option>42</option>
+        <option>43</option>
+        <option>44</option>
+      </select>
+    </label>
+  ` : `
+    <label>Tam:
+      <select id="tamanho-${p.id}">
+        <option>P</option>
+        <option>M</option>
+        <option>G</option>
+      </select>
+    </label>
+  `}
           <label>Quan:
             <input type="number" id="quantidade-${p.id}" min="1" value="1">
           </label>

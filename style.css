@@ -42,7 +42,6 @@ header input {
 
 .nav button:hover{
   text-decoration: underline;
- font-size: 15px;
 }
 .carrinho-lg {
   cursor: pointer;
@@ -257,6 +256,7 @@ header input {
     text-align: left;
     padding: 10px 0;
     font-size: 16px;
+    border-bottom: solid #a5a0a0;
   }
 
   nav.mobile-hidden {
